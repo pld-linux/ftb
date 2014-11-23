@@ -1,0 +1,30 @@
+--- ftb-0.6.2/Makefile.in.orig	2014-11-23 09:46:50.644964709 +0100
++++ ftb-0.6.2/Makefile.in	2014-11-23 09:49:34.681624492 +0100
+@@ -22,6 +22,8 @@
+ @AR_BLRTS@
+ @RANLIB_BLRTS@
+ @BGSYS_LIB_PATH@
++DESTDIR=
++includedir=@includedir@
+ sbindir=@sbindir@
+ libdir=@libdir@
+ abs_top_builddir=@abs_top_builddir@
+@@ -74,11 +76,11 @@
+ 	${MAKE} -C components/examples all
+ 
+ install:
+-	install -v -b -d @prefix@; 
+-	install -v -b -d @sbindir@;
+-	install -v -b -d @includedir@;
+-	install -v -b -d @libdir@; 
+-	install -v -b @TEMPSBIN@/* @sbindir@;
+-	install -v -b @TEMPLIB@/* @libdir@/;
+-	install -v -b @abs_top_srcdir@/include/*.h @includedir@;
++	install -v -b -d $(DESTDIR)$(prefix); 
++	install -v -b -d $(DESTDIR)$(sbindir);
++	install -v -b -d $(DESTDIR)$(includedir);
++	install -v -b -d $(DESTDIR)$(libdir); 
++	install -v -b @TEMPSBIN@/* $(DESTDIR)$(sbindir);
++	install -v -b ${abs_top_srcdir}/lib/* $(DESTDIR)$(libdir);
++	install -v -b @abs_top_srcdir@/include/*.h $(DESTDIR)$(includedir);
+ #	install -v -b @abs_top_srcdir@/components/examples/*ftb* @prefix@/components/examples;
