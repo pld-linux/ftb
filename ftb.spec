@@ -2,7 +2,7 @@ Summary:	Fault Tolerance Backplance library
 Summary(pl.UTF-8):	Biblioteka Fault Tolerance Backplance
 Name:		ftb
 Version:	0.6.2
-Release:	1
+Release:	2
 License:	BSD
 Group:		Libraries
 #Source0Download: http://www.mcs.anl.gov/research/cifts/downloads/index.php
