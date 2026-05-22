@@ -2,13 +2,14 @@ Summary:	Fault Tolerance Backplance library
 Summary(pl.UTF-8):	Biblioteka Fault Tolerance Backplance
 Name:		ftb
 Version:	0.6.2
-Release:	2
+Release:	3
 License:	BSD
 Group:		Libraries
 #Source0Download: http://www.mcs.anl.gov/research/cifts/downloads/index.php
 Source0:	http://www.mcs.anl.gov/research/cifts/software/%{name}-%{version}.tgz
 # Source0-md5:	d79b3dbcfdbfadb372cd4e47811d3048
 Patch0:		%{name}-destdir.patch
+Patch1:		%{name}-pthread-sig.patch
 URL:		http://www.mcs.anl.gov/research/cifts/
 BuildRequires:	autoconf >= 2.59
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -46,13 +47,16 @@ Statyczna biblioteka FTB.
 %prep
 %setup -q
 %patch -P0 -p1
+%patch -P1 -p1
 
 %build
 %{__autoconf}
 %{__autoheader}
 %configure
 
-%{__make}
+%{__make} \
+	CC="%{__cc} %{rpmldflags}" \
+	CFLAGS_FTB="-Wall -fPIC -I\${INC_DIR} %{rpmcflags} %{rpmcppflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
